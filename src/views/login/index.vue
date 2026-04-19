@@ -2,31 +2,25 @@
   <div class="login-container">
     <div class="login-content">
       <div class="login-info">
-        <p class="title">欢迎登录 领课教育系统（开源版）</p>
+        <p class="title">欢迎登录 在线教育系统</p>
         <p class="info">
-          领课教育系统(roncoo-education)是基于领课网络多年的在线教育平台开发和运营经验打造出来的产品，致力于打造一个各行业都适用的分布式在线教育系统。系统采用前后端分离模式，前台采用vue.js为核心框架，后台采用Spring
-          Cloud为核心框架。系统目前主要功能有课程点播功能，支持多家视频云的接入，课程附件管理功能，支持多家存储云的接入，可以帮助个人或者企业快速搭建一个轻量级的在线教育平台。
+          在线课程匿名化评价系统系统旨在解决当前中心化评价平台存在的“刷好评/差评”、“评价被删改”、“用户因怕得罪创作者而不敢直言”等痛点
         </p>
-        <div style="text-align: center; font-size: 10px">
-          <img src="@/assets/images/weixin.jpg" alt="作者微信公众号" style="width: 120px; height: auto" />
-          <div style="text-align: center; margin-top: 5px">关注微信公众号，可获取更多资料</div>
-        </div>
       </div>
       <div class="login-panel">
         <el-form v-loading="loading" :model="loginForm" label-position="left" @keyup.enter="handleLogin()">
-          <h3 class="login-head">管理员登录</h3>
+          <h3 class="login-head">安全管理登录</h3>
           <el-form-item class="form-group" prop="mobile">
-            <el-input v-model="loginForm.mobile" placeholder="用户名" />
+            <el-input v-model="loginForm.mobile" placeholder="管理员账号" />
           </el-form-item>
           <el-form-item class="form-group" prop="mobilePwd">
-            <el-input v-model="loginForm.mobilePwd" placeholder="密码" type="password" show-password />
+            <el-input v-model="loginForm.mobilePwd" placeholder="登录密码" type="password" show-password />
           </el-form-item>
           <el-form-item class="form-group" prop="verCode">
             <el-input v-model="loginForm.verCode" class="var-input" placeholder="验证码" />
             <img class="var-img" :src="verImg" @click="getCaptcha" />
           </el-form-item>
-          <el-button class="login-button" type="primary" @click="handleLogin">登 录</el-button>
-          <div class="tip">账号：18800000000/123456（需要本地部署）</div>
+          <el-button class="login-button" type="primary" @click="handleLogin">安全登录</el-button>
         </el-form>
       </div>
     </div>

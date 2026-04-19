@@ -15,16 +15,21 @@
     <select-course v-if="course.visible" :visible="course.visible" @close="handleCourse" />
   </el-dialog>
 </template>
+
 <script setup>
   import { reactive, ref } from 'vue'
   import { ElMessage } from 'element-plus'
   import { courseApi } from '@/api/course'
   import SelectCourse from '@/components/Selector/Course/index.vue'
+  import { useRoute } from 'vue-router'
+
+  // 获取路由信息
+  const route = useRoute()
+  // 获取专区 id
+  const zoneId = route.query.zoneId
 
   // 课程设置
-  const course = ref({
-    visible: false
-  })
+  const course = ref({ visible: false })
 
   const courseSelect = () => {
     course.value.visible = true
@@ -53,17 +58,19 @@
     sort: 1
   }
   const formModel = reactive({ ...formDefault })
+
   const onSubmit = async () => {
     // 校验
     const valid = await formRef.value.validate()
     if (!valid) return
-
     if (loading.value === true) {
       ElMessage.warning('正在处理···')
       return
     }
     loading.value = true
     try {
+      // 添加 zoneId 到 formModel
+      formModel.zoneId = zoneId
       if (formModel.id) {
         await courseApi.zoneCourseEdit(formModel)
         ElMessage.success('修改成功')
@@ -87,6 +94,7 @@
     visible.value = true
   }
   defineExpose({ onOpen })
+
   const onClose = () => {
     visible.value = false
     Object.assign(formModel, formDefault)
